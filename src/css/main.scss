@@ -1,0 +1,60 @@
+/* COMPILE IT WITH RUBY --- TYPE IN THE CONSOLE: sass --watch src/css/main.scss:src/css/main.css */
+
+// COLORS
+
+$blackboard: #2c2c2c;
+
+// BASE
+
+body {
+    background-color: $blackboard;
+    color:white;
+}
+
+P {
+    margin: 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+}
+
+// LAYOUT
+
+header,footer {
+    padding:20px 0px;
+}
+
+// CUSTOM CLASSES
+
+.tic-tac-toe-grid {
+    padding: 50px 255px;
+    text-align:center;
+    font-size:50px;
+    box-sizing: content-box;
+    .row:nth-child(even) {
+        .col-4:nth-child(even) {
+            border: solid 1px white;
+        }
+        .col-4:nth-child(odd) {
+            border-bottom:solid 1px white;
+            border-top:solid 1px white;
+        }
+    }
+    .row:nth-child(odd) {
+        .col-4:nth-child(even) {
+            border-left: solid 1px white;
+            border-right: solid 1px white;
+        }
+    }
+    div.col-4 {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        height:180px;
+    }
+}
+
+// CHANGES MADE TO BOOTSTRAP CLASSES
+
+// CHANGES MADE TO ANIMATE.CSS
