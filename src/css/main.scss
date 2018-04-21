@@ -2,6 +2,7 @@
 
 // COLORS
 
+$greenboard: #325336;
 $blackboard: #2c2c2c;
 
 // BASE
@@ -27,11 +28,19 @@ header,footer {
 
 // CUSTOM CLASSES
 
+.setup-player button {
+    color:$blackboard;
+    background:white;
+    font-weight: 600;
+}
+
 .tic-tac-toe-grid {
     padding: 50px 255px;
     text-align:center;
     font-size:50px;
     box-sizing: content-box;
+    user-select: none;
+    
     .row:nth-child(even) {
         .col-4:nth-child(even) {
             border: solid 1px white;
@@ -52,6 +61,7 @@ header,footer {
         justify-content: center;
         align-items: center;
         height:180px;
+        cursor: pointer;
     }
 }
 

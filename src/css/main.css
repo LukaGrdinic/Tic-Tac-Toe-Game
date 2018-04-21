@@ -12,11 +12,17 @@ h1, h2, h3, h4, h5, h6 {
 header, footer {
   padding: 20px 0px; }
 
+.setup-player button {
+  color: #2c2c2c;
+  background: white;
+  font-weight: 600; }
+
 .tic-tac-toe-grid {
   padding: 50px 255px;
   text-align: center;
   font-size: 50px;
-  box-sizing: content-box; }
+  box-sizing: content-box;
+  user-select: none; }
   .tic-tac-toe-grid .row:nth-child(even) .col-4:nth-child(even) {
     border: solid 1px white; }
   .tic-tac-toe-grid .row:nth-child(even) .col-4:nth-child(odd) {
@@ -29,6 +35,7 @@ header, footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 180px; }
+    height: 180px;
+    cursor: pointer; }
 
 /*# sourceMappingURL=main.css.map */
