@@ -228,4 +228,6 @@ function closureThing() {
     }
 }
 
+// Hello
+
 var stuff = closureThing(); // Closure toggles true and false
