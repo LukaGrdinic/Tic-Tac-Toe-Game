@@ -20,12 +20,12 @@ function setPlayer(playerSetup) {
 // Setting the colors of player and computer
 // =========================================
 function setUserButtonColors(buttonClicked) {
-    buttonClicked.css('background', '#2c2c2c'). // how to set #2c2c2c to be $blackboard?
+    buttonClicked.css('background', '#2c2c2c'). // how to set #2c2c2c to be $blackboard? /* Use cssText method */ or set a class!
     css('color', 'white').
     css('border', 'solid 1px white');
 }
 
-function setComputerButtonColors(buttonOther) {
+function setComputerButtonColors(buttonOther) { /* Use cssText method */
     buttonOther.css('background', 'white').
     css('color', '#2c2c2c').
     css('border', 'solid 1px transparent');
@@ -37,7 +37,7 @@ $('.tic-tac-toe-grid .col-4').on('click', function (e) {
     debugger;
     if (game.playerTurn !== 'computer') {
         if (game.winner === '') {
-            var fieldNumber = parseInt(e.target.id);
+            let fieldNumber = parseInt(e.target.id);
             $('#' + fieldNumber).text(game.playerSign);
             game.gridArray[fieldNumber - 1] = game.playerSign;
             game.playerTurn = 'computer';
@@ -92,10 +92,10 @@ function updateFieldsAndMovesLeft() {
 
 function pickRandomField() {
     if (game.playerTurn === 'computer') {
-        var min = 0;
-        var max = game.movesLeft - 1;
-        var randomFieldIndex = Math.floor(Math.random() * (max - min + 1)) + min; // Random Number between min and max variables
-        var randomFieldLeft = game.fieldsLeft[randomFieldIndex];
+        let min = 0;
+        let max = game.movesLeft - 1;
+        let randomFieldIndex = Math.floor(Math.random() * (max - min + 1)) + min; // Random Number between min and max letiables
+        let randomFieldLeft = game.fieldsLeft[randomFieldIndex];
         game.gridArray[randomFieldLeft - 1] = game.computerSign;
         updateFieldsAndMovesLeft();
         $('#' + randomFieldLeft).text(game.computerSign);
@@ -105,15 +105,15 @@ function pickRandomField() {
 
 // Winning Algorithm
 
-function winningSchemeBuilder(sign) { // this function should have a sign parameter
-    if (game.gridArray[0] === game[sign] && game.gridArray[1] === game[sign] && game.gridArray[2] === game[sign] || // What a big fucking if statement
-        game.gridArray[3] === game[sign] && game.gridArray[4] === game[sign] && game.gridArray[5] === game[sign] ||
-        game.gridArray[6] === game[sign] && game.gridArray[7] === game[sign] && game.gridArray[8] === game[sign] ||
-        game.gridArray[0] === game[sign] && game.gridArray[3] === game[sign] && game.gridArray[6] === game[sign] ||
-        game.gridArray[1] === game[sign] && game.gridArray[4] === game[sign] && game.gridArray[7] === game[sign] ||
-        game.gridArray[2] === game[sign] && game.gridArray[5] === game[sign] && game.gridArray[8] === game[sign] ||
-        game.gridArray[0] === game[sign] && game.gridArray[4] === game[sign] && game.gridArray[8] === game[sign] ||
-        game.gridArray[2] === game[sign] && game.gridArray[4] === game[sign] && game.gridArray[6] === game[sign]) {
+function winningSchemeBuilder(sign) { // What a big fucking if statement !
+    if (game.gridArray[0] === game[sign] && game.gridArray[1] === game[sign] && game.gridArray[2] === game[sign] || // first row
+        game.gridArray[3] === game[sign] && game.gridArray[4] === game[sign] && game.gridArray[5] === game[sign] || // second row
+        game.gridArray[6] === game[sign] && game.gridArray[7] === game[sign] && game.gridArray[8] === game[sign] || // third row
+        game.gridArray[0] === game[sign] && game.gridArray[3] === game[sign] && game.gridArray[6] === game[sign] || // first column
+        game.gridArray[1] === game[sign] && game.gridArray[4] === game[sign] && game.gridArray[7] === game[sign] || // second column
+        game.gridArray[2] === game[sign] && game.gridArray[5] === game[sign] && game.gridArray[8] === game[sign] || // third column
+        game.gridArray[0] === game[sign] && game.gridArray[4] === game[sign] && game.gridArray[8] === game[sign] || // diagonal topleft - bottomright
+        game.gridArray[2] === game[sign] && game.gridArray[4] === game[sign] && game.gridArray[6] === game[sign]) { // diagonal topright - bottomleft
         return true;
     } else {
         return false;
@@ -121,7 +121,7 @@ function winningSchemeBuilder(sign) { // this function should have a sign parame
 }
 
 function checkForWinner(lastMove, currentPlayer) {
-    var winningScheme = winningSchemeBuilder(currentPlayer);
+    let winningScheme = winningSchemeBuilder(currentPlayer);
     if (winningScheme) {
         declareWinner();
         game.lastMove = lastMove;
@@ -132,14 +132,19 @@ function declareWinner() {
     if (game.winner !== '') {
         window.alert(game.winner + ' wins!');
     }
+    resetGame();
+}
+
+function resetGame() {
+    console.log('Game is reset!');
 }
 
 /* MAIN ALGORITHM */
 /* ============== */
 
-// pickRandomField needs to become pickBestField
+// pickRandomField needs to become pickBestField // maybe later
 
-// There needs to be a function that gives an aproximation of chances for user to win and computer to win
+// There needs to be a function that gives an aproximation of chances for user to win and computer to win // maybe later
 
 /* THE AI ALGORITHM */
 
@@ -149,12 +154,12 @@ function makeWinningMove() { // function should check if there is a possible win
 
     if (game.playerTurn === 'computer') {
 
-        /* These are some variables to be used if there is no break; in the for loop */
-        var numberOfWinningMoves = 0;
-        var arrayOfWinningMoves = [];
+        /* These are some letiables to be used if there is no break; in the for loop */
+        let numberOfWinningMoves = 0;
+        let arrayOfWinningMoves = [];
 
-        for (var i = 0; i <= game.fieldsLeft.length; i++) {
-            var currentFieldObserved = game.fieldsLeft[i];
+        for (let i = 0; i <= game.fieldsLeft.length; i++) {
+            let currentFieldObserved = game.fieldsLeft[i];
 
             game.gridArray[currentFieldObserved - 1] = game.computerSign;
             checkForWinner(currentFieldObserved - 1, 'computerSign');
@@ -181,8 +186,8 @@ function preventPlayerFromWinning() { // function should stop the player from ma
 
     if (game.playerTurn === 'computer') {
 
-        for (var i = 0; i <= game.fieldsLeft.length; i++) {
-            var currentFieldObserved = game.fieldsLeft[i];
+        for (let i = 0; i <= game.fieldsLeft.length; i++) {
+            let currentFieldObserved = game.fieldsLeft[i];
 
             game.gridArray[currentFieldObserved - 1] = game.playerSign;
             checkForWinner(currentFieldObserved - 1, 'playerSign');
@@ -206,30 +211,28 @@ function preventPlayerFromWinning() { // function should stop the player from ma
 /* THINGS TO BE DONE */
 //====================
 
-// IF THE COMPUTER WINS THERE SHOULD BE A MESSAGE IN THE UPPER RIGHT CORNER THAT SAYS 'YOU LOOSE!'
-// IF THE COMPUTER WINS, THE SCREEN AROUND THE TIC TAC TOE GRID SHOULD SAY (WHISPER) LOOSER ... LOOSER ... LOOSER ... 
+// IF THE COMPUTER WINS THERE SHOULD BE A MESSAGE IN THE UPPER RIGHT CORNER THAT SAYS 'YOU LOOSE!' ; THEN THE GAME SHOULD RESTART
 
-// IF THE GAME IS A TIE , THERE SHOULD BE A MESSAGE IN THE UPPER RIGHT CORNER THAT SAYS 'A TIE!'
+// IF THE GAME IS A TIE , THERE SHOULD BE A MESSAGE IN THE UPPER RIGHT CORNER THAT SAYS 'A TIE!' ; THEN THE GAME SHOULD RESTART
 
-// THE GAME SHOULD RESET 3 SECONDS AFTER
+// IF YOU WIN, THERE SHOULD BE A MESSAGE IN THE UPPER RIGHT CORNER THAT SAYS 'YOU WIN!'; THEN THE GAME SHOULD RESTART
+
+// THE GAME SHOULD RESET 3 SECONDS AFTER AND SAY - PLAY ANOTHER GAME ? YES - NO (MAYBE A MODAL WINDOW)
+
+// COMPUTER SHOULD START THE GAME , WHEN HE IS X, AND TRY TO WIN IT
 
 /* EXAMPLE OF A CLOSURE */
 
 function closureThing() {
-    var myVar = false;
+    let myVar = false;
     return function () {
-        if (myVar === false) {
-            myVar = true;
-            console.log(myVar);
-        } else {
-            myVar = false;
-            console.log(myVar);
-        }
+        myVar = !myVar;
+        console.log(myVar);
     }
 }
 
 // Hello
 
-var stuff = closureThing(); // Closure toggles true and false
+let stuff = closureThing(); // Closure toggles true and false
 
 /* This is just for testing purposes */
