@@ -34,7 +34,7 @@ function setComputerButtonColors(buttonOther) { /* Use cssText method */
 // Handling the tic tac toe grid
 // =============================
 $('.tic-tac-toe-grid .col-4').on('click', function (e) {
-    debugger;
+    /* debugger; */
     if (game.playerTurn !== 'computer') {
         if (game.winner === '') {
             let fieldNumber = parseInt(e.target.id);
@@ -123,20 +123,30 @@ function winningSchemeBuilder(sign) { // What a big fucking if statement !
 function checkForWinner(lastMove, currentPlayer) {
     let winningScheme = winningSchemeBuilder(currentPlayer);
     if (winningScheme) {
-        declareWinner();
         game.lastMove = lastMove;
+        declareWinner();
     }
 }
 
 function declareWinner() {
     if (game.winner !== '') {
         window.alert(game.winner + ' wins!');
+        resetGame();
     }
-    resetGame();
 }
 
 function resetGame() {
+    game.playerTurn = '';
+    game.gridArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    game.gridArray.forEach(function(x) {
+            $('#' + x).text('');
+    });
+    game.fieldsLeft = [];
+    game.lastMove = '';
+    game.movesLeft = 0;
+    game.winner = '';
     console.log('Game is reset!');
+    /* I should have somehow made a copy of the state of the game object when the app is initialized  */
 }
 
 /* MAIN ALGORITHM */
