@@ -72,7 +72,14 @@ let game = {
     arrayOfWinningMoves: [],
     fieldsLeft: [], // Fields that have still not been used in the game
     movesLeft: 0, // Number of moves left in the game
-    winner: ''
+    winner: '',
+    playerScore: function () {
+        return localStorage.getItem('playerScore');
+
+    },
+    computerScore: function () {
+        return localStorage.getItem('computerScore');
+    }
 }
 
 function assignComputerSign() {
@@ -129,24 +136,47 @@ function checkForWinner(lastMove, currentPlayer) {
 }
 
 function declareWinner() {
+
+    /* Keep track of the total score */
+
+    if (game.winner === 'Computer') {
+        let computerPoints = parseInt(game.computerScore());
+        computerPoints++;
+        localStorage.setItem('computerScore', computerPoints);
+    } else if (game.winner === 'Player') {
+        let playerPoints = parseInt(game.playerScore());
+        playerPoints++;
+        localStorage.setItem('playerScore', playerPoints);
+    };
+
+    /* Declaring a winner */
+
     if (game.winner !== '') {
         window.alert(game.winner + ' wins!');
-        resetGame();
-    }
+        toggleModalWindow();
+        /* resetGame(); */
+    } 
+     /* else if (game.winner === '' && game.movesLeft === 0) {
+        window.alert(`It's a tie!`);
+    } */
 }
 
 function resetGame() {
     game.playerTurn = '';
     game.gridArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-    game.gridArray.forEach(function(x) {
-            $('#' + x).text('');
-    });
+    game.gridArray.forEach(function (x) {
+        $('#' + x).text('');
+    }); /* This function should fire after the user clicks 'play another game' in the modal window */
     game.fieldsLeft = [];
     game.lastMove = '';
     game.movesLeft = 0;
     game.winner = '';
     console.log('Game is reset!');
     /* I should have somehow made a copy of the state of the game object when the app is initialized  */
+}
+
+function toggleModalWindow() {
+    $('#exampleModal').modal('toggle')
 }
 
 /* MAIN ALGORITHM */
