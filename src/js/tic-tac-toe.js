@@ -79,6 +79,11 @@ let game = {
     },
     computerScore: function () {
         return localStorage.getItem('computerScore');
+    },
+    showStatistics: function() {
+        let playerWins = localStorage.getItem('playerScore');
+        let computerWins = localStorage.getItem('computerScore');
+        window.alert('Player wins: ' + playerWins + ', Computer wins: ' + computerWins);
     }
 }
 
