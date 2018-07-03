@@ -38,4 +38,11 @@ header, footer {
     height: 180px;
     cursor: pointer; }
 
+.btn-restart {
+  background: #58626d;
+  color: white;
+  border-color: white; }
+  .btn-restart:hover {
+    background: #323c47; }
+
 /*# sourceMappingURL=main.css.map */

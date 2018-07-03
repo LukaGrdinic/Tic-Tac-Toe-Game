@@ -73,4 +73,13 @@ header,footer {
 
 }
 
+.btn-restart {
+    background: #58626d;
+    color:white;
+    border-color: white;
+    &:hover {
+        background: #323c47;
+    }
+}
+
 // CHANGES MADE TO ANIMATE.CSS

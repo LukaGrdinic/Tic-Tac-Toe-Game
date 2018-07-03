@@ -149,14 +149,13 @@ function declareWinner() {
         localStorage.setItem('playerScore', playerPoints);
     };
 
-    /* Declaring a winner */
 
     if (game.winner !== '') {
         window.alert(game.winner + ' wins!');
         toggleModalWindow();
         /* resetGame(); */
-    } 
-     /* else if (game.winner === '' && game.movesLeft === 0) {
+    }
+    /* else if (game.winner === '' && game.movesLeft === 0) {
         window.alert(`It's a tie!`);
     } */
 }
@@ -189,8 +188,6 @@ function toggleModalWindow() {
 /* THE AI ALGORITHM */
 
 function makeWinningMove() { // function should check if there is a possible winning move
-
-    /* debugger; */
 
     if (game.playerTurn === 'computer') {
 
@@ -250,6 +247,8 @@ function preventPlayerFromWinning() { // function should stop the player from ma
 
 /* THINGS TO BE DONE */
 //====================
+
+// THE PLAYER SHOULD NOT BE ABLE TO SWITCH SIGNS ONCE THE GAME HAS STARTED
 
 // IF THE COMPUTER WINS THERE SHOULD BE A MESSAGE IN THE UPPER RIGHT CORNER THAT SAYS 'YOU LOOSE!' ; THEN THE GAME SHOULD RESTART
 

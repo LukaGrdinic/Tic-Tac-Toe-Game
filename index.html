@@ -18,8 +18,13 @@
     <div class="container">
         <header>
             <div class="row">
-                <div class="col-3 d-flex align-items-end justify-content-between">
-                    <h4>Playing as:</h4>
+                <div class="col-3 d-flex align-items-start justify-content-between">
+                    <div>
+                        <h4>Playing as:</h4>
+                        <div>
+                            <button onclick="resetGame()" class="btn btn-restart px-3 my-3">Restart Game</button>
+                        </div>
+                    </div>
                     <h4 class="setup-player">
                         <button id="X" class="btn" onclick="setPlayer('X')">X</button>
                         <button id="O" class="btn" onclick="setPlayer('O')">O</button>
@@ -28,7 +33,11 @@
                 <div class="col-6 text-center">
                     <h1>Tic Tac Toe !</h1>
                 </div>
-                <!-- Maybe a column or an element should be here -->
+                <div class="col-3 text-center">
+                    <div>
+                        <button onclick="window.alert('Computer wins, Player wins');" class="btn btn-lg btn-restart px-3 my-3">Statistics</button>
+                    </div>
+                </div>
             </div>
         </header>
         <main>
