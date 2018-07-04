@@ -4,6 +4,9 @@
 // Setting the X and the O
 // =======================
 function setPlayer(playerSetup) {
+    if (game.movesLeft < 9) {
+        return;
+    }
     game.playerSign = playerSetup;
     // Changing the color of the buttons
     let x = $('#X');
@@ -20,7 +23,7 @@ function setPlayer(playerSetup) {
 // Setting the colors of player and computer
 // =========================================
 function setUserButtonColors(buttonClicked) {
-    buttonClicked.css('background', '#2c2c2c'). // how to set #2c2c2c to be $blackboard? /* Use cssText method */ or set a class!
+    buttonClicked.css('background', '#2c2c2c'). 
     css('color', 'white').
     css('border', 'solid 1px white');
 }
@@ -71,7 +74,7 @@ let game = {
     lastMove: '',
     arrayOfWinningMoves: [],
     fieldsLeft: [], // Fields that have still not been used in the game
-    movesLeft: 0, // Number of moves left in the game
+    movesLeft: 9, // Number of moves left in the game
     winner: '',
     playerScore: function () {
         return localStorage.getItem('playerScore');
@@ -173,7 +176,7 @@ function resetGame() {
     }); /* This function should fire after the user clicks 'play another game' in the modal window */
     game.fieldsLeft = [];
     game.lastMove = '';
-    game.movesLeft = 0;
+    game.movesLeft = 9;
     game.winner = '';
     console.log('Game is reset!');
     /* I should have somehow made a copy of the state of the game object when the app is initialized  */
