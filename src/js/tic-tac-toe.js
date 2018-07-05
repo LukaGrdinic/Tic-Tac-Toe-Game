@@ -23,26 +23,27 @@ function setPlayer(playerSetup) {
 // Setting the colors of player and computer
 // =========================================
 function setUserButtonColors(buttonClicked) {
-    buttonClicked.css('background', '#2c2c2c'). 
-    css('color', 'white').
-    css('border', 'solid 1px white');
+    buttonClicked.css('background', '#2c2c2c').
+        css('color', 'white').
+        css('border', 'solid 1px white');
 }
 
 function setComputerButtonColors(buttonOther) { /* Use cssText method */
     buttonOther.css('background', 'white').
-    css('color', '#2c2c2c').
-    css('border', 'solid 1px transparent');
+        css('color', '#2c2c2c').
+        css('border', 'solid 1px transparent');
 }
 
 // Handling the tic tac toe grid
 // =============================
 $('.tic-tac-toe-grid .col-4').on('click', function (e) {
-    /* debugger; */
+    debugger;
     if (game.playerTurn !== 'computer') {
         if (game.winner === '') {
             let fieldNumber = parseInt(e.target.id);
-            $('#' + fieldNumber).text(game.playerSign);
             game.gridArray[fieldNumber - 1] = game.playerSign;
+            $('#' + fieldNumber).text(game.playerSign);
+            checkForWinner(fieldNumber, 'playerSign');
             game.playerTurn = 'computer';
             updateFieldsAndMovesLeft(); // Updates the situation of the game
             makeWinningMove(); // Checks if there are possible winning moves
@@ -50,7 +51,7 @@ $('.tic-tac-toe-grid .col-4').on('click', function (e) {
             setTimeout(function () {
                 pickRandomField();
             }, 500);
-            checkForWinner(fieldNumber, 'playerSign');
+            /* checkForWinner(fieldNumber, 'playerSign'); */
             checkForWinner(game.lastMove, 'computerSign');
             /* declareWinner(); */
 
@@ -83,7 +84,7 @@ let game = {
     computerScore: function () {
         return localStorage.getItem('computerScore');
     },
-    showStatistics: function() {
+    showStatistics: function () {
         let playerWins = localStorage.getItem('playerScore');
         let computerWins = localStorage.getItem('computerScore');
         window.alert('Player wins: ' + playerWins + ', Computer wins: ' + computerWins);
@@ -139,6 +140,11 @@ function checkForWinner(lastMove, currentPlayer) {
     let winningScheme = winningSchemeBuilder(currentPlayer);
     if (winningScheme) {
         game.lastMove = lastMove;
+        
+        if ( game.playerTurn === currentPlayer) {
+            game.winner = currentPlayer;
+        }
+
         declareWinner();
     }
 }
@@ -157,15 +163,10 @@ function declareWinner() {
         localStorage.setItem('playerScore', playerPoints);
     };
 
-
     if (game.winner !== '') {
         window.alert(game.winner + ' wins!');
         toggleModalWindow();
-        /* resetGame(); */
     }
-    /* else if (game.winner === '' && game.movesLeft === 0) {
-        window.alert(`It's a tie!`);
-    } */
 }
 
 function resetGame() {
