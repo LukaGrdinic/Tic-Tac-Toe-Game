@@ -38,13 +38,13 @@ function setComputerButtonColors(buttonOther) { /* Use cssText method */
 // =============================
 $('.tic-tac-toe-grid .col-4').on('click', function (e) {
     debugger;
-    if (game.playerTurn !== 'computer') {
+    if (game.playerTurn !== 'computerSign') {
         if (game.winner === '') {
             let fieldNumber = parseInt(e.target.id);
             game.gridArray[fieldNumber - 1] = game.playerSign;
             $('#' + fieldNumber).text(game.playerSign);
             checkForWinner(fieldNumber, 'playerSign');
-            game.playerTurn = 'computer';
+            game.playerTurn = 'computerSign';
             updateFieldsAndMovesLeft(); // Updates the situation of the game
             makeWinningMove(); // Checks if there are possible winning moves
             preventPlayerFromWinning(); // Checks if it should prevent the player from making a winning move
@@ -107,7 +107,7 @@ function updateFieldsAndMovesLeft() {
 }
 
 function pickRandomField() {
-    if (game.playerTurn === 'computer') {
+    if (game.playerTurn === 'computerSign') {
         let min = 0;
         let max = game.movesLeft - 1;
         let randomFieldIndex = Math.floor(Math.random() * (max - min + 1)) + min; // Random Number between min and max letiables
@@ -115,7 +115,7 @@ function pickRandomField() {
         game.gridArray[randomFieldLeft - 1] = game.computerSign;
         updateFieldsAndMovesLeft();
         $('#' + randomFieldLeft).text(game.computerSign);
-        game.playerTurn = 'player';
+        game.playerTurn = 'playerSign';
     }
 }
 
@@ -145,8 +145,8 @@ function checkForWinner(lastMove, currentPlayer) {
             game.winner = currentPlayer;
         }
 
-        declareWinner();
     }
+    declareWinner();
 }
 
 function declareWinner() {
@@ -165,6 +165,9 @@ function declareWinner() {
 
     if (game.winner !== '') {
         window.alert(game.winner + ' wins!');
+        toggleModalWindow();
+    } else if (game.winner === '' && game.movesLeft === 0) {
+        window.alert('It is a tie!');
         toggleModalWindow();
     }
 }
@@ -198,7 +201,7 @@ function toggleModalWindow() {
 
 function makeWinningMove() { // function should check if there is a possible winning move
 
-    if (game.playerTurn === 'computer') {
+    if (game.playerTurn === 'computerSign') {
 
         /* These are some letiables to be used if there is no break; in the for loop */
         let numberOfWinningMoves = 0;
@@ -215,7 +218,7 @@ function makeWinningMove() { // function should check if there is a possible win
                     game.gridArray[currentFieldObserved - 1] = game.computerSign;
                     let winningField = game.lastMove + 1;
                     $('#' + winningField).text(game.computerSign);
-                    game.playerTurn = 'player';
+                    game.playerTurn = 'playerSign';
                     game.winner = 'Computer';
                     break;
                 }
@@ -230,7 +233,7 @@ function makeWinningMove() { // function should check if there is a possible win
 
 function preventPlayerFromWinning() { // function should stop the player from making a winning move
 
-    if (game.playerTurn === 'computer') {
+    if (game.playerTurn === 'computerSign') {
 
         for (let i = 0; i <= game.fieldsLeft.length; i++) {
             let currentFieldObserved = game.fieldsLeft[i];
@@ -243,7 +246,7 @@ function preventPlayerFromWinning() { // function should stop the player from ma
                 let winningField = game.lastMove + 1;
                 $('#' + winningField).text(game.computerSign);
                 game.lastMove = '';
-                game.playerTurn = 'player';
+                game.playerTurn = 'playerSign';
                 break;
             }
             game.gridArray[currentFieldObserved - 1] = game.fieldsLeft[i];
@@ -256,6 +259,8 @@ function preventPlayerFromWinning() { // function should stop the player from ma
 
 /* THINGS TO BE DONE */
 //====================
+
+// THE GAME MUST STOP ONCE ANY PLAYER WINS, NOT A SINGLE MOVE CAN BE PLAYED AFTERWARDS
 
 // THE PLAYER SHOULD NOT BE ABLE TO SWITCH SIGNS ONCE THE GAME HAS STARTED
 
