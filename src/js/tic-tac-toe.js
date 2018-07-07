@@ -1,37 +1,48 @@
 // EVENT HANDLERS 
 // ===========================================================================================================
 
-// Setting the X and the O
+/* Initiating the app */
+
+$(document).ready(function () {
+    /* Setting the statistics for the session */
+    localStorage.setItem('playerScore', '0');
+    localStorage.setItem('computerScore', '0');
+});
+
+// Setting the userSign and computerSign
 // =======================
-function setPlayer(playerSetup) {
-    if (game.movesLeft < 9) {
-        return;
+
+function setPlayerSign(playerSetup) {
+    if (game.movesLeft === 9) {
+        game.playerSign = playerSetup;
+        // Changing the color of the buttons
+        let x = $('#X');
+        let o = $('#O');
+        if (game.playerSign === "X") {
+            setUserButtonColors(x, o);
+        } else if (game.playerSign === "O") {
+            setUserButtonColors(o, x);
+        }
+        setComputerSign();
     }
-    game.playerSign = playerSetup;
-    // Changing the color of the buttons
-    let x = $('#X');
-    let o = $('#O');
-    if (game.playerSign === "X") {
-        setUserButtonColors(x);
-        setComputerButtonColors(o);
-    } else if (game.playerSign === "O") {
-        setUserButtonColors(o);
-        setComputerButtonColors(x);
-    }
-    assignComputerSign();
-}
-// Setting the colors of player and computer
-// =========================================
-function setUserButtonColors(buttonClicked) {
-    buttonClicked.css('background', '#2c2c2c').
-        css('color', 'white').
-        css('border', 'solid 1px white');
 }
 
-function setComputerButtonColors(buttonOther) { /* Use cssText method */
-    buttonOther.css('background', 'white').
-        css('color', '#2c2c2c').
-        css('border', 'solid 1px transparent');
+function setComputerSign() {
+    if (game.playerSign === 'X') {
+        game.computerSign = 'O';
+    } else {
+        game.computerSign = 'X';
+    }
+}
+
+// Setting the colors of user and computer
+// =========================================
+
+function setUserButtonColors(buttonClicked, buttonOther) {
+    if (!buttonClicked.hasClass('btn-user')) {
+        buttonClicked.addClass('btn-user');
+        buttonOther.removeClass('btn-user');
+    }
 }
 
 // Handling the tic tac toe grid
@@ -91,13 +102,7 @@ let game = {
     }
 }
 
-function assignComputerSign() {
-    if (game.playerSign === 'X') {
-        game.computerSign = 'O';
-    } else {
-        game.computerSign = 'X';
-    }
-}
+
 
 function updateFieldsAndMovesLeft() {
     game.fieldsLeft = game.gridArray.filter(function (field) {
@@ -136,17 +141,19 @@ function winningSchemeBuilder(sign) { // What a big fucking if statement !
     }
 }
 
-function checkForWinner(lastMove, currentPlayer) {
-    let winningScheme = winningSchemeBuilder(currentPlayer);
-    if (winningScheme) {
-        game.lastMove = lastMove;
-        
-        if ( game.playerTurn === currentPlayer) {
-            game.winner = currentPlayer;
-        }
+function checkForWinner(fieldPlayed, currentPlayer) {
+    if (game.winner === '') {
+        let winningScheme = winningSchemeBuilder(currentPlayer);
+        if (winningScheme) {
+            game.lastMove = fieldPlayed;
 
+            if (game.playerTurn === currentPlayer) {
+                game.winner = currentPlayer;
+            }
+
+        }
+        declareWinner();
     }
-    declareWinner();
 }
 
 function declareWinner() {
@@ -163,10 +170,13 @@ function declareWinner() {
         localStorage.setItem('playerScore', playerPoints);
     };
 
+    /* Declare winner or tie */
+
     if (game.winner !== '') {
         window.alert(game.winner + ' wins!');
         toggleModalWindow();
     } else if (game.winner === '' && game.movesLeft === 0) {
+        game.winner = 'Tie';
         window.alert('It is a tie!');
         toggleModalWindow();
     }
@@ -262,15 +272,11 @@ function preventPlayerFromWinning() { // function should stop the player from ma
 
 // THE GAME MUST STOP ONCE ANY PLAYER WINS, NOT A SINGLE MOVE CAN BE PLAYED AFTERWARDS
 
-// THE PLAYER SHOULD NOT BE ABLE TO SWITCH SIGNS ONCE THE GAME HAS STARTED
-
 // IF THE COMPUTER WINS THERE SHOULD BE A MESSAGE IN THE UPPER RIGHT CORNER THAT SAYS 'YOU LOOSE!' ; THEN THE GAME SHOULD RESTART
 
 // IF THE GAME IS A TIE , THERE SHOULD BE A MESSAGE IN THE UPPER RIGHT CORNER THAT SAYS 'A TIE!' ; THEN THE GAME SHOULD RESTART
 
 // IF YOU WIN, THERE SHOULD BE A MESSAGE IN THE UPPER RIGHT CORNER THAT SAYS 'YOU WIN!'; THEN THE GAME SHOULD RESTART
-
-// THE GAME SHOULD RESET 3 SECONDS AFTER AND SAY - PLAY ANOTHER GAME ? YES - NO (MAYBE A MODAL WINDOW)
 
 // COMPUTER SHOULD START THE GAME , WHEN HE IS X, AND TRY TO WIN IT
 

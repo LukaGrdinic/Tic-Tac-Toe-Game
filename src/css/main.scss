@@ -65,12 +65,10 @@ header,footer {
     }
 }
 
-.btn-player { // maybe it is better to be called btn-user
-
-}
-
-.btn-computer {
-
+.btn-user {
+    background: #2c2c2c !important;
+    color: white !important;
+    border: solid 1px white !important;
 }
 
 .btn-restart {
