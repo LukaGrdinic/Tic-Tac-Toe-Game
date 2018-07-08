@@ -7,6 +7,7 @@ $(document).ready(function () {
     /* Setting the statistics for the session */
     localStorage.setItem('playerScore', '0');
     localStorage.setItem('computerScore', '0');
+    localStorage.setItem('ties', '0');
 });
 
 // Setting the userSign and computerSign
@@ -59,9 +60,9 @@ $('.tic-tac-toe-grid .col-4').on('click', function (e) {
             updateFieldsAndMovesLeft(); // Updates the situation of the game
             makeWinningMove(); // Checks if there are possible winning moves
             preventPlayerFromWinning(); // Checks if it should prevent the player from making a winning move
-            setTimeout(function () {
-                pickRandomField();
-            }, 500);
+            /* setTimeout(function () { */
+            pickRandomField(); /* Because the function is asynchronous , the check for winner doesnt happen when well when computer plays last move */
+            /* }, 500); */
             /* checkForWinner(fieldNumber, 'playerSign'); */
             checkForWinner(game.lastMove, 'computerSign');
             /* declareWinner(); */
@@ -85,7 +86,7 @@ let game = {
     gridArray: ['1', '2', '3', '4', '5', '6', '7', '8', '9'], // Tic Tac Toe fields placeholder,
     lastMove: '',
     arrayOfWinningMoves: [],
-    fieldsLeft: [], // Fields that have still not been used in the game
+    fieldsLeft: ['1', '2', '3', '4', '5', '6', '7', '8', '9'], // Fields that have still not been used in the game
     movesLeft: 9, // Number of moves left in the game
     winner: '',
     playerScore: function () {
@@ -95,14 +96,21 @@ let game = {
     computerScore: function () {
         return localStorage.getItem('computerScore');
     },
+    tieScore: function() {
+        return localStorage.getItem('ties');
+    },
     showStatistics: function () {
         let playerWins = localStorage.getItem('playerScore');
         let computerWins = localStorage.getItem('computerScore');
-        window.alert('Player wins: ' + playerWins + ', Computer wins: ' + computerWins);
+        let ties = localStorage.getItem('ties');
+        window.alert('Player wins: ' + playerWins + ', Computer wins: ' + computerWins + ' Ties: ' + ties);
     }
 }
 
-
+function startGameByComputer() {
+    game.playerTurn = 'computerSign';
+    pickRandomField();
+}
 
 function updateFieldsAndMovesLeft() {
     game.fieldsLeft = game.gridArray.filter(function (field) {
@@ -158,18 +166,6 @@ function checkForWinner(fieldPlayed, currentPlayer) {
 
 function declareWinner() {
 
-    /* Keep track of the total score */
-
-    if (game.winner === 'Computer') {
-        let computerPoints = parseInt(game.computerScore());
-        computerPoints++;
-        localStorage.setItem('computerScore', computerPoints);
-    } else if (game.winner === 'Player') {
-        let playerPoints = parseInt(game.playerScore());
-        playerPoints++;
-        localStorage.setItem('playerScore', playerPoints);
-    };
-
     /* Declare winner or tie */
 
     if (game.winner !== '') {
@@ -180,6 +176,22 @@ function declareWinner() {
         window.alert('It is a tie!');
         toggleModalWindow();
     }
+
+     /* Keep track of the total score */
+     debugger;
+     if (game.winner === 'computerSign') {
+         let computerPoints = parseInt(game.computerScore());
+         computerPoints++;
+         localStorage.setItem('computerScore', computerPoints);
+     } else if (game.winner === 'playerSign') {
+         let playerPoints = parseInt(game.playerScore());
+         playerPoints++;
+         localStorage.setItem('playerScore', playerPoints);
+     } else if (game.winner === 'Tie') {
+         let tiePoints = parseInt(game.tieScore());
+         tiePoints++;
+         localStorage.setItem('ties', tiePoints);
+     };
 }
 
 function resetGame() {
@@ -188,26 +200,19 @@ function resetGame() {
     game.gridArray.forEach(function (x) {
         $('#' + x).text('');
     }); /* This function should fire after the user clicks 'play another game' in the modal window */
-    game.fieldsLeft = [];
+    game.fieldsLeft = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
     game.lastMove = '';
     game.movesLeft = 9;
     game.winner = '';
     console.log('Game is reset!');
-    /* I should have somehow made a copy of the state of the game object when the app is initialized  */
 }
 
 function toggleModalWindow() {
     $('#exampleModal').modal('toggle')
 }
 
-/* MAIN ALGORITHM */
-/* ============== */
-
-// pickRandomField needs to become pickBestField // maybe later
-
-// There needs to be a function that gives an aproximation of chances for user to win and computer to win // maybe later
-
 /* THE AI ALGORITHM */
+/* ================ */
 
 function makeWinningMove() { // function should check if there is a possible winning move
 
@@ -270,28 +275,12 @@ function preventPlayerFromWinning() { // function should stop the player from ma
 /* THINGS TO BE DONE */
 //====================
 
-// THE GAME MUST STOP ONCE ANY PLAYER WINS, NOT A SINGLE MOVE CAN BE PLAYED AFTERWARDS
+// COMPUTER SHOULD START THE GAME , WHEN HE IS X, AND TRY TO WIN IT
+
+// THE MODAL WINDOW AND DECLARE WINNER SHOULD HAPPEN AFTER THE FIELDS ARE FILLED ON SCREEN
 
 // IF THE COMPUTER WINS THERE SHOULD BE A MESSAGE IN THE UPPER RIGHT CORNER THAT SAYS 'YOU LOOSE!' ; THEN THE GAME SHOULD RESTART
 
 // IF THE GAME IS A TIE , THERE SHOULD BE A MESSAGE IN THE UPPER RIGHT CORNER THAT SAYS 'A TIE!' ; THEN THE GAME SHOULD RESTART
 
 // IF YOU WIN, THERE SHOULD BE A MESSAGE IN THE UPPER RIGHT CORNER THAT SAYS 'YOU WIN!'; THEN THE GAME SHOULD RESTART
-
-// COMPUTER SHOULD START THE GAME , WHEN HE IS X, AND TRY TO WIN IT
-
-/* EXAMPLE OF A CLOSURE */
-
-function closureThing() {
-    let myVar = false;
-    return function () {
-        myVar = !myVar;
-        console.log(myVar);
-    }
-}
-
-// Hello
-
-let stuff = closureThing(); // Closure toggles true and false
-
-/* This is just for testing purposes */
