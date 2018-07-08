@@ -60,13 +60,8 @@ $('.tic-tac-toe-grid .col-4').on('click', function (e) {
             updateFieldsAndMovesLeft(); // Updates the situation of the game
             makeWinningMove(); // Checks if there are possible winning moves
             preventPlayerFromWinning(); // Checks if it should prevent the player from making a winning move
-            /* setTimeout(function () { */
-            pickRandomField(); /* Because the function is asynchronous , the check for winner doesnt happen when well when computer plays last move */
-            /* }, 500); */
-            /* checkForWinner(fieldNumber, 'playerSign'); */
+            pickRandomField();
             checkForWinner(game.lastMove, 'computerSign');
-            /* declareWinner(); */
-
         } else {
             window.alert('The game is over! No more playing!');
         }
@@ -96,7 +91,7 @@ let game = {
     computerScore: function () {
         return localStorage.getItem('computerScore');
     },
-    tieScore: function() {
+    tieScore: function () {
         return localStorage.getItem('ties');
     },
     showStatistics: function () {
@@ -169,29 +164,34 @@ function declareWinner() {
     /* Declare winner or tie */
 
     if (game.winner !== '') {
-        window.alert(game.winner + ' wins!');
-        toggleModalWindow();
+        setTimeout(function () {
+            window.alert(game.winner + ' wins!');
+            toggleModalWindow();
+        }, 300);
+
     } else if (game.winner === '' && game.movesLeft === 0) {
         game.winner = 'Tie';
-        window.alert('It is a tie!');
-        toggleModalWindow();
+        setTimeout(function () {
+            window.alert('It is a tie!');
+            toggleModalWindow();
+        }, 300);
     }
 
-     /* Keep track of the total score */
-     debugger;
-     if (game.winner === 'computerSign') {
-         let computerPoints = parseInt(game.computerScore());
-         computerPoints++;
-         localStorage.setItem('computerScore', computerPoints);
-     } else if (game.winner === 'playerSign') {
-         let playerPoints = parseInt(game.playerScore());
-         playerPoints++;
-         localStorage.setItem('playerScore', playerPoints);
-     } else if (game.winner === 'Tie') {
-         let tiePoints = parseInt(game.tieScore());
-         tiePoints++;
-         localStorage.setItem('ties', tiePoints);
-     };
+    /* Keep track of the total score */
+    debugger;
+    if (game.winner === 'computerSign') {
+        let computerPoints = parseInt(game.computerScore());
+        computerPoints++;
+        localStorage.setItem('computerScore', computerPoints);
+    } else if (game.winner === 'playerSign') {
+        let playerPoints = parseInt(game.playerScore());
+        playerPoints++;
+        localStorage.setItem('playerScore', playerPoints);
+    } else if (game.winner === 'Tie') {
+        let tiePoints = parseInt(game.tieScore());
+        tiePoints++;
+        localStorage.setItem('ties', tiePoints);
+    };
 }
 
 function resetGame() {
