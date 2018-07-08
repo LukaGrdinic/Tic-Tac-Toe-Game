@@ -18,7 +18,10 @@
     <div class="container">
         <header>
             <div class="row">
-                <div class="col-lg-3 col-md-4 text-center text-md-left">
+                <div class="col-lg-6 col-md-4 order-md-2 text-center d-flex align-items-center justify-content-center mb-3 mb-md-0">
+                    <h1>Tic Tac Toe !</h1>
+                </div>
+                <div class="col-lg-3 col-md-4 order-md-1 text-center text-md-left">
                     <div class="d-flex align-items-center justify-content-center justify-content-md-between">
                         <h4>Playing as:</h4>
                         <h4 class="setup-player ml-3 ml-md-0">
@@ -33,10 +36,7 @@
                         <button onclick="resetGame()" class="btn btn-restart px-3 ">Restart Game</button>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-4 text-center d-flex align-items-center justify-content-center">
-                    <h1>Tic Tac Toe !</h1>
-                </div>
-                <div class="col-lg-3 col-md-4 text-center">
+                <div class="col-lg-3 col-md-4 order-md-3 text-center">
                     <div>
                         <button onclick="game.showStatistics();" class="btn btn-lg btn-restart px-3 my-3">Statistics</button>
                     </div>
@@ -69,17 +69,13 @@
         <footer>
             <div class="row">
                 <div class="col-12">
-                    <h5 class="text-center">Made by LukaGrdinic</h5>
+                    <h5 class="text-center mt-5 mb-3">Made by LukaGrdinic</h5>
                 </div>
             </div>
         </footer>
     </div>
 
-    <!-- Modal -->
-
-    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-    </button> -->
+    <!-- Modal window -->
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

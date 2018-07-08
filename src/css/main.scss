@@ -39,7 +39,7 @@ header,footer {
     margin-left: auto;
     margin-right: auto;
     text-align:center;
-    font-size: 10vw;
+    font-size: 8vw;
     box-sizing: content-box;
     user-select: none;
     
@@ -70,9 +70,19 @@ header,footer {
 @media (max-width: 576px) {
     .tic-tac-toe-grid {
         width: 90vw;
-        font-size: 20vw;
+        font-size: 15vw;
         div.col-4 {
             height: 30vw;
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .tic-tac-toe-grid {
+        width: 35vw;
+        font-size: 6.5vw;
+        div.col-4 {
+            height: 10vw;
         }
     }
 }

@@ -22,7 +22,7 @@ header, footer {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  font-size: 10vw;
+  font-size: 8vw;
   box-sizing: content-box;
   user-select: none; }
   .tic-tac-toe-grid .row:nth-child(even) .col-4:nth-child(even) {
@@ -43,9 +43,15 @@ header, footer {
 @media (max-width: 576px) {
   .tic-tac-toe-grid {
     width: 90vw;
-    font-size: 20vw; }
+    font-size: 15vw; }
     .tic-tac-toe-grid div.col-4 {
       height: 30vw; } }
+@media (min-width: 1200px) {
+  .tic-tac-toe-grid {
+    width: 35vw;
+    font-size: 6.5vw; }
+    .tic-tac-toe-grid div.col-4 {
+      height: 10vw; } }
 .btn-user {
   background: #2c2c2c !important;
   color: white !important;
