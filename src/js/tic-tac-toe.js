@@ -49,7 +49,6 @@ function setUserButtonColors(buttonClicked, buttonOther) {
 // Handling the tic tac toe grid
 // =============================
 $('.tic-tac-toe-grid .col-4').on('click', function (e) {
-    debugger;
     if (game.playerTurn !== 'computerSign') {
         if (game.winner === '') {
             let fieldNumber = parseInt(e.target.id);
@@ -103,8 +102,10 @@ let game = {
 }
 
 function startGameByComputer() {
-    game.playerTurn = 'computerSign';
-    pickRandomField();
+    if (game.movesLeft === 9) {
+        game.playerTurn = 'computerSign';
+        pickRandomField();
+    }
 }
 
 function updateFieldsAndMovesLeft() {
@@ -178,7 +179,6 @@ function declareWinner() {
     }
 
     /* Keep track of the total score */
-    debugger;
     if (game.winner === 'computerSign') {
         let computerPoints = parseInt(game.computerScore());
         computerPoints++;
