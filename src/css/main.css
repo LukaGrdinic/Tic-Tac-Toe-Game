@@ -18,9 +18,11 @@ header, footer {
   font-weight: 600; }
 
 .tic-tac-toe-grid {
-  padding: 50px 255px;
+  width: 45vw;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
-  font-size: 50px;
+  font-size: 10vw;
   box-sizing: content-box;
   user-select: none; }
   .tic-tac-toe-grid .row:nth-child(even) .col-4:nth-child(even) {
@@ -35,9 +37,15 @@ header, footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 180px;
+    height: 15vw;
     cursor: pointer; }
 
+@media (max-width: 576px) {
+  .tic-tac-toe-grid {
+    width: 90vw;
+    font-size: 20vw; }
+    .tic-tac-toe-grid div.col-4 {
+      height: 30vw; } }
 .btn-user {
   background: #2c2c2c !important;
   color: white !important;

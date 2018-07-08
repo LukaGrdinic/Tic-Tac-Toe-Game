@@ -115,7 +115,7 @@ function updateFieldsAndMovesLeft() {
 }
 
 function pickRandomField() {
-    if (game.playerTurn === 'computerSign') {
+    if (game.playerTurn === 'computerSign' && game.winner === '') {
         let min = 0;
         let max = game.movesLeft - 1;
         let randomFieldIndex = Math.floor(Math.random() * (max - min + 1)) + min; // Random Number between min and max letiables
@@ -216,7 +216,7 @@ function toggleModalWindow() {
 
 function makeWinningMove() { // function should check if there is a possible winning move
 
-    if (game.playerTurn === 'computerSign') {
+    if (game.playerTurn === 'computerSign' && game.winner === '') {
 
         /* These are some letiables to be used if there is no break; in the for loop */
         let numberOfWinningMoves = 0;
@@ -248,7 +248,7 @@ function makeWinningMove() { // function should check if there is a possible win
 
 function preventPlayerFromWinning() { // function should stop the player from making a winning move
 
-    if (game.playerTurn === 'computerSign') {
+    if (game.playerTurn === 'computerSign' && game.winner === '') {
 
         for (let i = 0; i <= game.fieldsLeft.length; i++) {
             let currentFieldObserved = game.fieldsLeft[i];
@@ -276,8 +276,6 @@ function preventPlayerFromWinning() { // function should stop the player from ma
 //====================
 
 // COMPUTER SHOULD START THE GAME , WHEN HE IS X, AND TRY TO WIN IT
-
-// THE MODAL WINDOW AND DECLARE WINNER SHOULD HAPPEN AFTER THE FIELDS ARE FILLED ON SCREEN
 
 // IF THE COMPUTER WINS THERE SHOULD BE A MESSAGE IN THE UPPER RIGHT CORNER THAT SAYS 'YOU LOOSE!' ; THEN THE GAME SHOULD RESTART
 

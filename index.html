@@ -18,25 +18,25 @@
     <div class="container">
         <header>
             <div class="row">
-                <div class="col-3 d-flex align-items-start justify-content-between">
-                    <div>
+                <div class="col-lg-3 col-md-4 text-center text-md-left">
+                    <div class="d-flex align-items-center justify-content-center justify-content-md-between">
                         <h4>Playing as:</h4>
-                        <div>
-                            <button onclick="startGameByComputer()" class="btn btn-restart px-3 mt-3 mb-2">Computer,start!</button>
-                        </div>
-                        <div>
-                            <button onclick="resetGame()" class="btn btn-restart px-3 ">Restart Game</button>
-                        </div>
+                        <h4 class="setup-player ml-3 ml-md-0">
+                            <button id="X" class="btn" onclick="setPlayerSign('X')">X</button>
+                            <button id="O" class="btn" onclick="setPlayerSign('O')">O</button>
+                        </h4>
                     </div>
-                    <h4 class="setup-player">
-                        <button id="X" class="btn" onclick="setPlayerSign('X')">X</button>
-                        <button id="O" class="btn" onclick="setPlayerSign('O')">O</button>
-                    </h4>
+                    <div>
+                        <button onclick="startGameByComputer()" class="btn btn-restart px-3 mt-3 mb-2">Computer,start!</button>
+                    </div>
+                    <div>
+                        <button onclick="resetGame()" class="btn btn-restart px-3 ">Restart Game</button>
+                    </div>
                 </div>
-                <div class="col-6 text-center">
+                <div class="col-lg-6 col-md-4 text-center d-flex align-items-center justify-content-center">
                     <h1>Tic Tac Toe !</h1>
                 </div>
-                <div class="col-3 text-center">
+                <div class="col-lg-3 col-md-4 text-center">
                     <div>
                         <button onclick="game.showStatistics();" class="btn btn-lg btn-restart px-3 my-3">Statistics</button>
                     </div>
