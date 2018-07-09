@@ -1,5 +1,5 @@
 // EVENT HANDLERS 
-// ===========================================================================================================
+// ================
 
 /* Initiating the app */
 
@@ -68,8 +68,6 @@ $('.tic-tac-toe-grid .col-4').on('click', function (e) {
 
 });
 
-// ===========================================================================================================
-
 // THE MAIN GAME OBJECT
 // ====================
 
@@ -102,7 +100,7 @@ let game = {
 }
 
 function startGameByComputer() {
-    if (game.movesLeft === 9) {
+    if (game.movesLeft === 9) { // If the game is just starting
         game.playerTurn = 'computerSign';
         pickRandomField();
     }
@@ -204,7 +202,6 @@ function resetGame() {
     game.lastMove = '';
     game.movesLeft = 9;
     game.winner = '';
-    console.log('Game is reset!');
 }
 
 function toggleModalWindow() {
