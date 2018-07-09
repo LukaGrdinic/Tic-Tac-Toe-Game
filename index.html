@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tic Tac Toe Game</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="src/css/main.css">
+
+
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="row">
+                <div class="col-lg-6 col-md-4 order-md-2 text-center d-flex align-items-center justify-content-center mb-3 mb-md-0">
+                    <h1>Tic Tac Toe !</h1>
+                </div>
+                <div class="col-lg-3 col-md-4 order-md-1 text-center text-md-left">
+                    <div class="d-flex align-items-center justify-content-center justify-content-md-between">
+                        <h4>Playing as:</h4>
+                        <h4 class="setup-player ml-3 ml-md-0">
+                            <button id="X" class="btn" onclick="setPlayerSign('X')">X</button>
+                            <button id="O" class="btn" onclick="setPlayerSign('O')">O</button>
+                        </h4>
+                    </div>
+                    <div>
+                        <button onclick="startGameByComputer()" class="btn btn-restart px-3 mt-3 mb-2">Computer,start!</button>
+                    </div>
+                    <div>
+                        <button onclick="resetGame()" class="btn btn-restart px-3 ">Restart Game</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 order-md-3 text-center">
+                    <div>
+                        <button onclick="game.showStatistics();" class="btn btn-lg btn-restart px-3 my-3">Statistics</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="row no-gutters">
+                <div class="col-12">
+                    <div id="tic-tac-toe" class="tic-tac-toe-grid">
+                        <div class="row no-gutters">
+                            <div id="1" class="col-4"></div>
+                            <div id="2" class="col-4"></div>
+                            <div id="3" class="col-4"></div>
+                        </div>
+                        <div class="row no-gutters">
+                            <div id="4" class="col-4"></div>
+                            <div id="5" class="col-4"></div>
+                            <div id="6" class="col-4"></div>
+                        </div>
+                        <div class="row no-gutters ">
+                            <div id="7" class="col-4"></div>
+                            <div id="8" class="col-4"></div>
+                            <div id="9" class="col-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div class="row">
+                <div class="col-12">
+                    <h5 class="text-center mt-5 mb-3">Made by LukaGrdinic</h5>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal window -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-primary">Play another game?</p>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="resetGame()" type="button" class="btn btn-secondary" data-dismiss="modal">Yes</button>
+                    <button onclick="toggleModalWindow()" type="button" class="btn btn-primary">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JQuerry -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+    <!-- End Bootstrap JQuerry -->
+
+    <script src="src/js/tic-tac-toe.js"></script>
+</body>
+
+</html>

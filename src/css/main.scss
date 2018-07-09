@@ -1,0 +1,105 @@
+/* COMPILE IT WITH RUBY --- TYPE IN THE CONSOLE: sass --watch src/css/main.scss:src/css/main.css */
+
+// COLORS
+
+$greenboard: #325336;
+$blackboard: #2c2c2c;
+
+// BASE
+
+body {
+    background-color: $blackboard;
+    color:white;
+}
+
+P {
+    margin: 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+}
+
+// LAYOUT
+
+header,footer {
+    padding:20px 0px;
+}
+
+// CUSTOM CLASSES
+
+.setup-player button {
+    color:$blackboard;
+    background:white;
+    font-weight: 600;
+}
+
+.tic-tac-toe-grid {
+    width: 45vw;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+    font-size: 8vw;
+    box-sizing: content-box;
+    user-select: none;
+    
+    .row:nth-child(even) {
+        .col-4:nth-child(even) {
+            border: solid 1px white;
+        }
+        .col-4:nth-child(odd) {
+            border-bottom:solid 1px white;
+            border-top:solid 1px white;
+        }
+    }
+    .row:nth-child(odd) {
+        .col-4:nth-child(even) {
+            border-left: solid 1px white;
+            border-right: solid 1px white;
+        }
+    }
+    div.col-4 {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        height: 15vw;
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 576px) {
+    .tic-tac-toe-grid {
+        width: 90vw;
+        font-size: 15vw;
+        div.col-4 {
+            height: 30vw;
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .tic-tac-toe-grid {
+        width: 35vw;
+        font-size: 6.5vw;
+        div.col-4 {
+            height: 10vw;
+        }
+    }
+}
+
+.btn-user {
+    background: #2c2c2c !important;
+    color: white !important;
+    border: solid 1px white !important;
+}
+
+.btn-restart {
+    background: #58626d;
+    color:white;
+    border-color: white;
+    &:hover {
+        background: #323c47;
+    }
+}
+
+// CHANGES MADE TO ANIMATE.CSS
